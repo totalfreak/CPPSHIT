@@ -1,0 +1,3 @@
+/home/daniel/CPPSHIT/CMakeFiles/rebuild_cache.dir
+/home/daniel/CPPSHIT/CMakeFiles/edit_cache.dir
+/home/daniel/CPPSHIT/CMakeFiles/main.dir
