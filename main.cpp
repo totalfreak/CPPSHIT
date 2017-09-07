@@ -1,34 +1,43 @@
 #include <stdio.h>
 #include <opencv2/opencv.hpp>
 
+using namespace std;
 using namespace cv;
 
-int main(int argc, char** argv) {
-    if(argc != 2) {
-        printf("Usage: main.out <Image_Path>\n");
-    }
+int main() {
+    VideoCapture cap(0);
 
-    char* imageName = argv[1];
-    Mat image;
-    image = imread(imageName, 1);
-
-    if(!image.data) {
-        printf("No image data \n");
+    if(!cap.isOpened()) {
+        cout << "Couldn't open video source";
         return -1;
     }
 
-    Mat gray_image;
-    cvtColor(image, gray_image, COLOR_BGR2GRAY);
+    int frameWidth = cap.get(CV_CAP_PROP_FRAME_WIDTH);
+    int frameHeight = cap.get(CV_CAP_PROP_FRAME_HEIGHT);
 
-    imwrite("../../images/Gray_image.jpg", gray_image);
-    
-    namedWindow(imageName, WINDOW_AUTOSIZE);
-    namedWindow("Gray image", WINDOW_AUTOSIZE);
+    VideoWriter video("Output.avi", CV_FOURCC('M', 'J', 'P', 'G'), 24, Size(frameWidth, frameHeight));
 
-    imshow(imageName, image);
-    imshow("Gray image", gray_image);
+    while(true) {
+        Mat frame;
 
-    waitKey(0);
+        cap >> frame;
 
+        if(frame.empty()) {
+            break;
+        }
+        video.write(frame);
+
+        imshow("Cam", frame);
+
+        char c = (char)waitKey(1);
+        if(c == 27) {
+            break;
+        }
+    }
+    //remove("Output.avi");
+    cap.release();
+    video.release();
+
+    destroyAllWindows();
     return 0;
 }
