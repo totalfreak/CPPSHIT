@@ -15,7 +15,7 @@ int main() {
     int frameWidth = cap.get(CV_CAP_PROP_FRAME_WIDTH);
     int frameHeight = cap.get(CV_CAP_PROP_FRAME_HEIGHT);
 
-    VideoWriter video("Output.avi", CV_FOURCC('M', 'J', 'P', 'G'), 24, Size(frameWidth, frameHeight));
+    VideoWriter video("Output.avi", CV_FOURCC('M', 'J', 'P', 'G'), 30, Size(frameWidth, frameHeight));
 
     while(true) {
         Mat frame;
@@ -34,7 +34,7 @@ int main() {
             break;
         }
     }
-    //remove("Output.avi");
+    remove("Output.avi");
     cap.release();
     video.release();
 
