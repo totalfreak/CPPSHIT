@@ -26,6 +26,8 @@
                 "/usr/include/x86_64-linux-gnu/c++/5",
                 "/usr/local/include",
                 "/usr/include",
+                "/include/libc",
+                "/usr/include/linux/",
                 "/usr/include/x86_64-linux-gnu",
                 "${workspaceRoot}"
             ],
